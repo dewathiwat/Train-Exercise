@@ -15,30 +15,30 @@ public class printButterfly {
                 System.out.print(icon);
             }
             for (int s = 1; s <= 2 * (i - r) + 1; s++) {
-                System.out.print(" ");
+                System.out.print(blankSpace);
             }
             for (int d = r; d >= 1; d--) {
-                System.out.print("+");
+                System.out.print(icon);
             }
             System.out.println();
         }
         for (int j = 1; j <= i; j++) {
-            System.out.print("+");
+            System.out.print(icon);
         }
         System.out.print("-");
         for (int j = 1; j <= i; j++) {
-            System.out.print("+");
+            System.out.print(icon);
         }
         System.out.println();
         for (int r = i - 1; r >= 1; r--) {
             for (int d = 1; d <= r; d++) {
-                System.out.print("+");
+                System.out.print(icon);
             }
             for (int s = 1; s <= 2 * (i - r) + 1; s++) {
-                System.out.print(" ");
+                System.out.print(blankSpace);
             }
             for (int d = r; d >= 1; d--) {
-                System.out.print("+");
+                System.out.print(icon);
             }
             System.out.println();
         }
