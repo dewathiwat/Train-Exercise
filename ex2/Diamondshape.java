@@ -3,6 +3,7 @@ package ex2;
 import java.util.Stack;
 
 
+
 public class Diamondshape {
 
     private int i;
@@ -33,7 +34,9 @@ public class Diamondshape {
         }
         stack.stream().forEach(System.out::println);// print half top diamond
         stack.pop();
-        Reverse.reverse(stack).stream().forEach(System.out::println);// print half under diamond
+        for(int i=stack.size();i>0;i--){
+            System.out.println(stack.pop());// print half under diamond
+        }
     }
 
    

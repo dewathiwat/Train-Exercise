@@ -35,6 +35,8 @@ public class Butterflyshape {
         area = "";
         stack.stream().forEach(System.out::println);// print half top butterfly
         stack.pop();
-        Reverse.reverse(stack).stream().forEach(System.out::println);// print half under butterfly
+        for(int i=stack.size();i>0;i--){
+            System.out.println(stack.pop());// print half under butterfly
+        }
     }
 }
