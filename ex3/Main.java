@@ -7,8 +7,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String readPathFile = "/Users/athiwatjansomwong/Train-Exercise/ex3/TextFile.txt";//input location input file
-        String writePathFile = "/Users/athiwatjansomwong/Train-Exercise/ex3/WriteFile.txt";//input location output file
+        String readPathFile = "/Users/athiwatjansomwong/Train-Exercise/ex3/TextFile.txt";// กรอกที่อยู่ไฟล์ที่ต้องการ input
+        String writePathFile = "/Users/athiwatjansomwong/Train-Exercise/ex3/WriteFile.txt";//กรอกที่อยู่ไฟล์ที่ต้องการ output 
         
         ReadFile readFile = new ReadFile();
         SetDateAndTime setDate = new SetDateAndTime();
