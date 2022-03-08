@@ -1,8 +1,11 @@
 package ex3;
 
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SetDateAndTime {
@@ -14,6 +17,7 @@ public class SetDateAndTime {
         int minutes = 0;
         int loop = 0;
         int yy = 0, mm = 0, dd = 0;
+        
             for (String data :arrReadFile) {
                 String line = data;
                 String lastWord = line.replaceAll("^.*?(\\w+)\\W*$", "$1");
@@ -28,18 +32,18 @@ public class SetDateAndTime {
                     loop++;
                 } else {
                     if (hourse == 12) {
-                        arr.add(LocalTime.of(hourse, minutes)+ " " + "Lunch\n");
+                        arr.add(convert24HrTo12Hr(hourse,minutes)+ " " + "Lunch\n");
                         hourse++;
                     }
                     if (hourse == 16) {
-                        arr.add(LocalTime.of(hourse, minutes)+ " " + "Networking Event \n");
+                        arr.add(convert24HrTo12Hr(hourse,minutes)+ " " + "Networking Event \n");
                         day++;
                         dd++;
                         hourse = 9;
                         minutes = 0;
                         arr.add("Day#"+day+" "+LocalDate.of(yy, mm, dd)+"\n");
                     }
-                    arr.add(LocalTime.of(hourse, minutes)+ " " + line+"\n");
+                    arr.add(convert24HrTo12Hr(hourse,minutes)+ " " + line+"\n");
 
                     if (min1 >= 60) {
                         minutes = minutes + min1 - 60;
@@ -53,7 +57,23 @@ public class SetDateAndTime {
                     }
                 }
             }
+        
         return arr;
+    }
+
+    private String convert24HrTo12Hr(int hourse,int minutes){
+        SimpleDateFormat sdf = new SimpleDateFormat("HH.mm");
+    	try{
+    	Date date3 = sdf.parse(hourse+"."+minutes);
+    	//new format
+    	SimpleDateFormat sdf2 = new SimpleDateFormat("hh.mm aa");
+    	//formatting the given time to new format with AM/PM
+        return sdf2.format(date3);
+    	}catch(ParseException e){
+    		e.printStackTrace();
+            return null;
+    	}
+       
     }
     
 }

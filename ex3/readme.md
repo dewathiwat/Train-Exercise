@@ -6,3 +6,7 @@
 # flowchart
 
 ![Image](https://cdn.discordapp.com/attachments/854276246069837834/950711997190799420/Untitled_Diagram.drawio.png)
+
+# Sequence Diagram
+
+![Image](https://cdn.discordapp.com/attachments/854276246069837834/950731839918719016/Untitled_Diagram.drawio-2.png)
