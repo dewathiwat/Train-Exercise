@@ -1,7 +1,7 @@
 package ex3;
 
 
-import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -69,7 +69,7 @@ public class SetDateAndTime {
     	SimpleDateFormat sdf2 = new SimpleDateFormat("hh.mm aa");
     	//formatting the given time to new format with AM/PM
         return sdf2.format(date3);
-    	}catch(ParseException e){
+    	}catch(Exception e){
     		e.printStackTrace();
             return null;
     	}

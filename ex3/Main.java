@@ -17,6 +17,7 @@ public class Main {
 
         List<String> arrReadFile = readFile.readFile(readPathFile);
         List<String> arr = setDate.SetDate(arrReadFile);
+        arr.forEach(System.out::print);
 
         writeFile.whenWriteStringUsingBufferedWritter_thenCorrect(arr,writePathFile);
         

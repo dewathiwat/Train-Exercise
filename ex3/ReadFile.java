@@ -1,7 +1,6 @@
 package ex3;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,7 +12,7 @@ public class ReadFile {
             while (scanner.hasNext()) {
                 arr.add(scanner.nextLine());
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return arr;

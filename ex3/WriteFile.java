@@ -2,7 +2,6 @@ package ex3;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 
 public class WriteFile {
@@ -15,8 +14,8 @@ public class WriteFile {
             writer.write(data);
         }
         writer.close();
-    } catch (IOException e) {
-        // TODO Auto-generated catch block
+    } catch (Exception e) {
+        
         e.printStackTrace();
     }
 }
