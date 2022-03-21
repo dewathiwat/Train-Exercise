@@ -2,7 +2,6 @@ package ex3v2;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class ReadFile {
                 fileModel.setTextLine(currentLine);
                 arr.add(fileModel);
             }  
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         return arr;

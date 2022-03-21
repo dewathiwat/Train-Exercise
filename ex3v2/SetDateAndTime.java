@@ -49,7 +49,6 @@ public class SetDateAndTime {
         }
         return arr;
     }
-
     public LocalDate checkHoliday(LocalDate date) {
         if (date.getDayOfWeek().getValue() == 6) {
             date = date.plusDays(2);
