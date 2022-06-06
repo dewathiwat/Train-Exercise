@@ -3,14 +3,14 @@
 spring:
     profiles:
         active:  dev
+    mvc:
+      pathmatch:
+            matching-strategy: ANT_PATH_MATCHER
 
 ---
 
 spring:
     profiles: dev
-    mvc:
-      pathmatch:
-            matching-strategy: ANT_PATH_MATCHER
 server:
     port: 8080
 
@@ -18,9 +18,7 @@ server:
 
 spring:
     profiles: sit
-    mvc:
-      pathmatch:
-            matching-strategy: ANT_PATH_MATCHER
+    
 server:
     port: 9080
 
@@ -28,8 +26,6 @@ server:
 
 spring:
     profiles: uat
-    mvc:
-      pathmatch:
-            matching-strategy: ANT_PATH_MATCHER
+    
 server:
     port: 9090
