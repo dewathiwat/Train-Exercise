@@ -15,7 +15,7 @@ import com.example.demo.model.TitleMinModel;
 
 @Service
 public class SetDateAndTimeService {
-    public List<DayDateListModel> SetDate(DateListModel fileRead) {
+    public List<DayDateListModel> setDate(DateListModel fileRead) {
         List<DayDateListModel> arr = new ArrayList<>();
         List<TimeTitleMinModel> listTime = new ArrayList<>();
         DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mm a");
@@ -25,6 +25,7 @@ public class SetDateAndTimeService {
         LocalDate date = LocalDate.of(Integer.parseInt(dateSplit[0]), Integer.parseInt(dateSplit[1]),
                 Integer.parseInt(dateSplit[2]));
         date = checkHoliday(date);
+        boolean morning = true;
         int day = 1;
         int loop = 0;
 
@@ -34,9 +35,11 @@ public class SetDateAndTimeService {
             DayDateListModel dayDateListModel = new DayDateListModel();
             dayDateListModel.setDateTh(dateFormat.format(date));
             dayDateListModel.setDay(day);
-                if (time.equals(LocalTime.NOON)) {
+            
+                if (time.equals(LocalTime.NOON)|| time.isAfter(LocalTime.NOON) && morning) {
                     listTime.add(lunchTime(timeFormat.format(time)));
                     time = time.plusHours(1);
+                    morning = false;
                 }else if (time.plusHours(hours).plusMinutes(minute).isAfter(LocalTime.of(17, 0))) {
                     listTime.add(networkingEvenTime(timeFormat.format(time)));
                     dayDateListModel.setList(listTime);
@@ -45,6 +48,7 @@ public class SetDateAndTimeService {
                     time = LocalTime.of(9, 0);
                     date = date.plusDays(1);
                     date = checkHoliday(date);
+                    morning = true;
                     day++;
                 }
                     listTime.add(timeTitleMin(timeFormat.format(time),data.getTitle(),data.getMin()));
@@ -61,9 +65,9 @@ public class SetDateAndTimeService {
 
 
     public LocalDate checkHoliday(LocalDate date) {
-        if (date.getDayOfWeek().getValue() == 6) {
+        if (date.getDayOfWeek().getValue() == 6) { //date.getDayOfWeek() == DayOfWeek.SATURDAY
             date = date.plusDays(2);
-        } else if (date.getDayOfWeek().getValue() == 7) {
+        } else if (date.getDayOfWeek().getValue() == 7) { //date.getDayOfWeek() == DayOfWeek.SATURDAY
             date = date.plusDays(1);
         }
         return date;
