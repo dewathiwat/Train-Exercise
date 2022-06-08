@@ -12,7 +12,7 @@ import com.example.demo.model.DateListModel;
 import com.example.demo.model.DayDateListModel;
 import com.example.demo.model.TimeTitleMinModel;
 import com.example.demo.model.TitleMinModel;
-
+import java.time.temporal.ChronoUnit;
 @Service
 public class SetDateAndTimeService {
     public List<DayDateListModel> setDate(DateListModel fileRead) {
@@ -41,7 +41,7 @@ public class SetDateAndTimeService {
             
                 if (time.equals(LocalTime.NOON)|| timeCheck.isAfter(LocalTime.NOON) && morning) {
                     if(timeCheck.isAfter(LocalTime.NOON) && !time.equals(LocalTime.NOON) ){
-                        newMin = (int) (LocalTime.NOON.until(timeCheck, java.time.temporal.ChronoUnit.MINUTES));
+                        newMin = (int) (LocalTime.NOON.until(timeCheck, ChronoUnit.MINUTES));
                         listTime.add(timeTitleMin(timeFormat.format(time),data.getTitle(),data.getMin()- newMin));
                         time = time.plusHours(hours-(newMin / 60)).plusMinutes(minute-(newMin % 60));
                         hours = newMin / 60;
@@ -51,6 +51,13 @@ public class SetDateAndTimeService {
                         time = time.plusHours(1); 
                         morning = false;
                 }else if (timeCheck.isAfter(LocalTime.of(17, 0))) {
+                    if(timeCheck.isAfter(LocalTime.of(17, 0)) && !time.equals(LocalTime.of(17, 0)) ){
+                        newMin = (int) (LocalTime.of(17, 0).until(timeCheck, ChronoUnit.MINUTES));
+                        listTime.add(timeTitleMin(timeFormat.format(time),data.getTitle(),data.getMin()- newMin));
+                        time = time.plusHours(hours-(newMin / 60)).plusMinutes(minute-(newMin % 60));
+                        hours = newMin / 60;
+                        minute = newMin % 60;
+                    }
                     listTime.add(networkingEvenTime(timeFormat.format(time)));
                     dayDateListModel.setList(listTime);
                     arr.add(dayDateListModel);
