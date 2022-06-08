@@ -30,17 +30,27 @@ public class SetDateAndTimeService {
         int loop = 0;
 
         for (TitleMinModel data : fileRead.getList()) {
+            int newMin = data.getMin();
             int hours = data.getMin() / 60;
             int minute = data.getMin() % 60;
             DayDateListModel dayDateListModel = new DayDateListModel();
+            LocalTime timeCheck = time.plusHours(hours).plusMinutes(minute);
             dayDateListModel.setDateTh(dateFormat.format(date));
             dayDateListModel.setDay(day);
             
-                if (time.equals(LocalTime.NOON)|| time.isAfter(LocalTime.NOON) && morning) {
-                    listTime.add(lunchTime(timeFormat.format(time)));
-                    time = time.plusHours(1);
-                    morning = false;
-                }else if (time.plusHours(hours).plusMinutes(minute).isAfter(LocalTime.of(17, 0))) {
+            
+                if (time.equals(LocalTime.NOON)|| timeCheck.isAfter(LocalTime.NOON) && morning) {
+                    if(timeCheck.isAfter(LocalTime.NOON) && !time.equals(LocalTime.NOON) ){
+                        newMin = (int) (LocalTime.NOON.until(timeCheck, java.time.temporal.ChronoUnit.MINUTES));
+                        listTime.add(timeTitleMin(timeFormat.format(time),data.getTitle(),data.getMin()- newMin));
+                        time = time.plusHours(hours-(newMin / 60)).plusMinutes(minute-(newMin % 60));
+                        hours = newMin / 60;
+                        minute = newMin % 60;
+                    }
+                       listTime.add(lunchTime(timeFormat.format(time)));
+                        time = time.plusHours(1); 
+                        morning = false;
+                }else if (timeCheck.isAfter(LocalTime.of(17, 0))) {
                     listTime.add(networkingEvenTime(timeFormat.format(time)));
                     dayDateListModel.setList(listTime);
                     arr.add(dayDateListModel);
@@ -51,7 +61,7 @@ public class SetDateAndTimeService {
                     morning = true;
                     day++;
                 }
-                    listTime.add(timeTitleMin(timeFormat.format(time),data.getTitle(),data.getMin()));
+                    listTime.add(timeTitleMin(timeFormat.format(time),data.getTitle(),newMin));
                     time = time.plusHours(hours).plusMinutes(minute);
                     if (fileRead.getList().size() - 1 == loop) {
                         listTime.add(networkingEvenTime(timeFormat.format(time)));
